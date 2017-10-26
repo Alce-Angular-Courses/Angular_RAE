@@ -1,0 +1,13 @@
+<div class="container">
+  <h2>Binding</h2>
+  <p>
+    <label for="nombre">Dime tu nombre</label>
+    <input type="text" id="nombre" [(ngModel)]="sNombre">
+  </p>
+  <p>
+    <button (click)="btnBorrar($event)">Borrar</button>
+  </p>
+  <p>Hola {{sNombre.toUpperCase()}}</p>
+  <p>Tienes menos de {{nEdad + 2}} años</p>
+</div>
+  
