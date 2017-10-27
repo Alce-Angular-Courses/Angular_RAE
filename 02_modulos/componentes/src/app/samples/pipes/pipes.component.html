@@ -1,0 +1,35 @@
+<div> 
+  <h2>Pipes (Filtros)</h2>
+
+  <p>
+    <label for="nombre">Dime tu nombre</label>
+    <input type="text" id="nombre" [(ngModel)]="sNombre">
+  </p> 
+  <p>
+    <label for="edad">Dime tu edad</label>
+    <input type="text" id="edad" [(ngModel)]="nEdad">
+  </p> 
+
+<!--  
+<p>
+  <button (click)=" btnBorrar() ">Borrar</button>
+</p>
+
+
+
+<p>Precio: {{nPrecio | currency}}</p>
+
+
+
+
+ -->
+<h3>Ejemplos de Pipes</h3>
+
+<p>Hola {{sNombre | titlecase}} </p>
+<p>Precio: {{nPrecio | currency}}</p>
+<p>Edad: {{nEdad | number:'2.1-2'}}</p>
+<p>Datos: {{oDatos | json}}</p>
+<p>Fecha: {{dFecha | date:'dd-MM-yyyy'}} 
+ <p>Fecha: {{dFecha | date:'fullDate'}}</p> 
+</div>
+

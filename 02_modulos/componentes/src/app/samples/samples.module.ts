@@ -5,6 +5,7 @@ import { BindingComponent } from './binding/binding.component';
 import { BindLocalComponent } from './bind-local/bind-local.component';
 import { ListaComponent } from './lista/lista.component';
 import { Lista4Component } from './lista4/lista4.component';
+import { PipesComponent } from './pipes/pipes.component';
 
 @NgModule({
   imports: [
@@ -15,13 +16,15 @@ import { Lista4Component } from './lista4/lista4.component';
     BindingComponent,
     BindLocalComponent,
     ListaComponent,
-    Lista4Component
+    Lista4Component,
+    PipesComponent
   ],
   exports: [
     BindingComponent,
     BindLocalComponent,
     ListaComponent,
-    Lista4Component
+    Lista4Component,
+    PipesComponent
   ]
 })
 export class SamplesModule { }
