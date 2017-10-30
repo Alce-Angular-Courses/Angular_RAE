@@ -10,6 +10,7 @@ export class PadreComponent implements OnInit {
 
   sClave: string;
   aLibros: Array<string>;
+  aLibrosAsinc: any;
 
   constructor(private booksService: BooksService) { }
 
@@ -19,7 +20,11 @@ export class PadreComponent implements OnInit {
   }
 
   buscar() {
-    this.aLibros = this.booksService.buscar(this.sClave);
+    // Sincronica
+    // this.aLibros = this.booksService.buscar(this.sClave);
+    // ASincronica
+    this.aLibrosAsinc = this.booksService.buscarAsync(this.sClave);
+    console.log(this.aLibrosAsinc);
     this.sClave = '';
   }
 }
