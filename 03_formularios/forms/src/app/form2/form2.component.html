@@ -1,43 +1,60 @@
 <div class="container">
-  <h2>Formulario basado en la vista</h2>
+  <h2>Validación del formulario basado en la vista</h2>
 
-  <form (ngSubmit)="enviar()">
+  <form (ngSubmit)="enviar()" #myform = "ngForm">
 
     <legend>Datos Personales</legend>
       <p>
         <!--Etiqueta / Campo "Mombre"-->						
         <label for="firstname">Nombre</label>
         <input type="text" id="firstname" name="firstname" 
-          [(ngModel)]="user.nombre">
-      </p>              
+          #firstnameState = "ngModel"
+          [(ngModel)]="user.nombre" minlength="3" required>
+      </p>
+      
+      <div [hidden]="firstnameState.valid || firstnameState.untouched ">
+        <div class="errores" 
+          [hidden]="!firstnameState.errors?.required">
+          El nombre es obligatorio</div>
+        <div class="errores" 
+          [hidden] = "!firstnameState.errors?.minlength">
+          El nombre debe tener un mínimo de 3 caracteres
+        </div>
+      </div>
+
       <p>
         <!--Etiqueta / Campo "Apellidos"-->
         <label for="lastname">Apellidos</label>
-        <input type="text" id="lastname" name="lastname" 
-          [(ngModel)]="user.apellidos">
-      </p>          
+        <input type="text" id="lastname" name="lastname"
+          #lastnameState = "ngModel" 
+          [(ngModel)]="user.apellidos" required>
+      </p>
+      
+        <div class="errores" [hidden]="lastnameState.untouched || lastnameState.valid">
+            <p>Es obligatorio escribir el apellido</p>
+        </div>
+      
       <p>
         <!--Etiqueta / Campo "Telefono"-->
         <label for="phoneNumber">Teléfono</label>
         <input type="text" id="phoneNumber" name="phoneNumber" 
-          [(ngModel)]="user.telefono">  
+          #phoneState = "ngModel"
+          [(ngModel)]="user.telefono" required pattern="^\d{9}$">  
       </p>	
+
+      <div class="errores"  
+      [hidden]="phoneState.valid || phoneState.untouched">
+      El telefono es obligatorio y debe tener 9 dígitos 
+    </div>
       
       <!--Radio-Buttos-->
       <legend>Selecciona una Impresora</legend>
   
-<!--         <input type="radio" name="printer" id="" value="Impresora1"
-        [(ngModel)]="impresoraSelect">
-        <label for="">Impresora 1</label>
-    
-        <input type="radio" name="printer" id="" value="Impresora2" 
-        [(ngModel)]="impresoraSelect">
-        <label for="">Impresora 2</label>  -->
-  
-  
+
        <div *ngFor="let impresora of aImpresoras">
           <input type="radio" 
-              name ="printer" [(ngModel)]="impresoraSelect" [value]="impresora">
+              name ="printer" [(ngModel)]="impresoraSelect" [value]="impresora" 
+              (change)="mostrarFinal=true">
           <label>{{impresora.nombre}}</label>
       </div>
 
@@ -50,7 +67,8 @@
           <label for="tono">Tono claro</label>	
   
           <input id="color" type="checkbox" [(ngModel)]="isColor" name="color"
-              [disabled]="!impresoraSeleccionada">
+              [disabled]="!impresoraSeleccionada"
+              (change)="avisarPrint()">
           <label for="color">Imprimir en colores</label><br>
       </p>
       
@@ -58,7 +76,8 @@
      <p>
           <label for="select">Departamento </label>
           <select id="select" name="select"
-            [(ngModel)]="dptoSelect" > 
+            [(ngModel)]="dptoSelect" 
+            (ngModelChange)="avisarDepartamento()"> 
               <option *ngFor="let departamento of aDepartamentos"
                   [ngValue]="departamento">
                   {{departamento.nombre}}
