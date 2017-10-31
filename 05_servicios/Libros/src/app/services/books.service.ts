@@ -15,7 +15,6 @@ export class BooksService {
    }
 
   buscar(clave: string) {
-
     return this.aLibros;
   }
 
